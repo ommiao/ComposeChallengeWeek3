@@ -80,7 +80,7 @@ private fun LoginTextField(labelText: String, labelIcon: ImageVector, modifier: 
                 )
                 MontText(
                     text = labelText,
-                    fontWeight = FontWeight.Thin,
+                    fontWeight = FontWeight.Light,
                     modifier = Modifier.padding(horizontal = 8.dp),
                     color = MaterialTheme.colors.onSurface
                 )

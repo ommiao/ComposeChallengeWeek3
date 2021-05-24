@@ -39,6 +39,11 @@ fun WeTradeButton(modifier: Modifier = Modifier, text: String = "BUTTON", bgColo
         onClick = onClick,
         modifier = modifier.height(48.dp),
         shape = RoundedCornerShape(24.dp),
+        elevation = ButtonDefaults.elevation(
+            defaultElevation = 0.dp,
+            pressedElevation = 0.dp,
+            disabledElevation = 0.dp
+        ),
         border = if (filled) null else BorderStroke(1.dp, Yellow),
         colors = ButtonDefaults.textButtonColors(
             backgroundColor = bgColor,

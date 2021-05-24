@@ -10,8 +10,15 @@ val Typography = Typography(
 
     body1 = TextStyle(
         fontFamily = MontFamily,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
+        fontWeight = FontWeight.Light,
+        fontSize = 13.sp
+    ),
+
+    h1 = TextStyle(
+        fontFamily = MontFamily,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 40.sp,
+        letterSpacing = 1.25.sp
     ),
 
     h2 = TextStyle(

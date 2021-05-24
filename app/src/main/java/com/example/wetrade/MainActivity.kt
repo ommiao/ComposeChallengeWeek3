@@ -9,6 +9,7 @@ import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.*
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
@@ -18,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.wetrade.ui.HomePage
 import com.example.wetrade.ui.LoginPage
 import com.example.wetrade.ui.WelcomePage
 import com.example.wetrade.ui.theme.WeTradeTheme
@@ -29,6 +31,7 @@ class MainActivity : ComponentActivity() {
         Welcome, Login
     }
 
+    @ExperimentalMaterialApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         BarUtils.transparentStatusBar(this)
@@ -45,6 +48,9 @@ class MainActivity : ComponentActivity() {
                     composable("login") {
                         LoginPage(navController)
                     }
+                    composable("home") {
+                        HomePage(navController)
+                    }
                 }
             }
         }
@@ -54,8 +60,25 @@ class MainActivity : ComponentActivity() {
 
 object BarUtils {
 
+    var window: Window? = null
+
     fun transparentStatusBar(activity: Activity) {
         transparentStatusBar(activity.window)
+        window = activity.window
+    }
+
+    fun lightStatusBar(){
+        if(window != null){
+            window!!.decorView.systemUiVisibility = window!!.decorView.systemUiVisibility or
+                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
+    }
+
+    fun darkStatusBar(){
+        if(window != null){
+            window!!.decorView.systemUiVisibility = window!!.decorView.systemUiVisibility xor
+                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
     }
 
     private fun transparentStatusBar(window: Window) {

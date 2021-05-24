@@ -6,13 +6,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Lock
-import androidx.compose.material.icons.outlined.MailOutline
-import androidx.compose.material.icons.outlined.PlayArrow
-import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,7 +19,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.wetrade.R
-import com.example.wetrade.ui.theme.Shapes
 import com.example.wetrade.ui.theme.White
 
 
@@ -60,7 +55,9 @@ fun LoginPage(navController: NavController) {
                 labelIcon = Icons.Outlined.Lock,
                 Modifier.padding(vertical = 8.dp)
             )
-            WeTradeButton(Modifier.fillMaxWidth().padding(top = 8.dp), text = "LOG IN")
+            WeTradeButton(Modifier.fillMaxWidth().padding(top = 8.dp), text = "LOG IN", onClick = {
+                navController.navigate("home")
+            })
         }
     }
 }

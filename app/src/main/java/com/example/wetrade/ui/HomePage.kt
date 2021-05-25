@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -27,12 +28,10 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.wetrade.R
 import com.example.wetrade.WeTradeViewModel
-import com.example.wetrade.ui.theme.Green
-import com.example.wetrade.ui.theme.White
-import com.example.wetrade.ui.theme.WhiteGray
-import com.example.wetrade.ui.theme.Yellow
+import com.example.wetrade.ui.theme.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlin.math.absoluteValue
 
 @ExperimentalMaterialApi
 @Preview
@@ -181,5 +180,52 @@ fun BottomSheetContent(coroutineScope: CoroutineScope, bottomSheetScaffoldState:
                 .paddingFromBaseline(top = 40.dp, bottom = 24.dp)
                 .fillMaxWidth()
         )
+        val viewModel: WeTradeViewModel = viewModel()
+        LazyColumn() {
+            items(viewModel.funds) { fund ->
+                Divider(
+                    color = MaterialTheme.colors.onSurface,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .height(56.dp)
+                        .padding(horizontal = 16.dp)
+                ) {
+                    Column(
+                        Modifier
+                            .width(80.dp)
+                            .paddingFromBaseline(top = 24.dp)
+                        ,
+                    ) {
+                        Text(text = fund.value, style = MaterialTheme.typography.body1)
+                        Text(text = "${if (fund.percent >= 0) '+' else '-'}${fund.percent.absoluteValue}%",
+                            style = MaterialTheme.typography.body1,
+                            color = if (fund.percent > 0) Green else Red,
+                            modifier = Modifier.paddingFromBaseline(top = 16.dp)
+                        )
+                    }
+                    Column(
+                        Modifier
+                            .weight(1f)
+                            .padding(horizontal = 16.dp)
+                            .paddingFromBaseline(top = 24.dp)
+                    ) {
+                        Text(text = fund.name, style = MaterialTheme.typography.h3)
+                        Text(
+                            text = fund.owner,
+                            style = MaterialTheme.typography.body1,
+                            modifier = Modifier.paddingFromBaseline(top = 16.dp)
+                        )
+                    }
+                    Image(
+                        painter = painterResource(fund.trend),
+                        contentDescription = "trend of ${fund.name}",
+                        Modifier.align(Alignment.CenterVertically)
+                    )
+                }
+            }
+        }
     }
 }

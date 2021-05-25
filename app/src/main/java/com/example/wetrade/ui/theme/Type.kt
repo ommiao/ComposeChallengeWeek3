@@ -28,6 +28,13 @@ val Typography = Typography(
         letterSpacing = 0.sp
     ),
 
+    h3 = TextStyle(
+        fontFamily = MontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 13.sp,
+        letterSpacing = 0.sp
+    ),
+
     subtitle1 = TextStyle(
         fontFamily = MontFamily,
         fontWeight = FontWeight.Medium,
